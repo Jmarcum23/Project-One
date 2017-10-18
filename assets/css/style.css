@@ -1,3 +1,253 @@
-body#splash {
-	
+html {
+  position: relative;
+  min-height: 100%;
 }
+body {
+	height: 100%;
+	color: #495057;
+	margin: 0;
+	margin-bottom: 90px;
+	font-family: 'Source Sans Pro', sans-serif;
+}
+body#splash {
+	height: 100%;
+    margin: 0;
+    margin-bottom: 90px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+	background: #ab4a9c;
+	background: webkit-linear-gradient(#ab4a9c, #662d91);
+	background: linear-gradient(#ab4a9c, #662d91);
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+header#splash-header {
+	padding-top: 80px;
+	text-align: center;
+}
+header#main-header {
+	height: 90px;
+	background: #ab4a9c;
+	background: webkit-linear-gradient(to bottom right, #ab4a9c, #662d91);
+	background: linear-gradient(to bottom right, #ab4a9c, #662d91);
+	width: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	z-index: 5;
+}
+
+h1 {
+	color: #fff;
+	padding-bottom: 20px;
+	font-family: 'Signika', sans-serif;
+	font-weight: bold;
+}
+
+h3 {
+	font-family: 'Signika', sans-serif;
+	font-weight: bold;
+	margin-top: 40px;
+	line-height: 2.5rem;
+}
+
+a#logo {
+	display: block;
+	background: url(../images/logo-header.png);
+	background-repeat: no-repeat;
+	width:200px;
+	height: 68px;
+	margin: 10px 0px;
+	margin-left: 15px;
+	float: left;
+}
+
+a#splash-logo {
+	display: block;
+	background: url(../images/logo.png);
+	background-repeat: no-repeat;
+	width: 300px;
+	height: 300px;
+	padding: 0 !important;
+	margin: 0 auto;
+}
+
+ul#social-media {
+	display: block;
+	float: right;
+	margin-top: 32px;
+	margin-right: 10px;
+}
+
+ul#social-media li {
+	display: inline-block;
+	color: #fff;
+	padding-left: 10px;
+	vertical-align: middle;
+}
+
+ul#social-media li a {
+	display: block;
+}
+
+a#facebook {
+	background: url(../images/facebook.png);
+	background-repeat: no-repeat;
+	width: 30px;
+	height: 30px;
+}
+
+a#twitter {
+	background: url(../images/twitter.png);
+	background-repeat: no-repeat;
+	width: 30px;
+	height: 30px;
+}
+
+a#instagram {
+	background: url(../images/instagram.png);
+	background-repeat: no-repeat;
+	width: 30px;
+	height: 30px;
+}
+
+.btn {
+	border-radius: 0 !important;
+	font-weight: bold;
+	min-width: 170px;
+	font-family: 'Signika', sans-serif;
+	background: #ffffff;
+	color: #662d91;	
+	cursor: pointer;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.btn:hover {
+	color: #ab4a9c;
+}
+
+#contact-btn, #website-btn {
+	background: #662d91;
+	color: #fff;
+	box-shadow: none;
+}
+
+#contact-btn:hover, #website-btn:hover {
+	background: #ab4a9c;
+}
+
+#website-btn {
+	margin-bottom: 20px;
+}
+
+
+#splash-content {
+	color: #ffffff;
+	text-align: center;
+	padding: 40px 0;
+}
+
+#splash-btn {
+	margin: 30px 0;	
+}
+
+input {
+	border-radius: 0 !important;
+	padding: .75rem !important;
+	margin-bottom: 20px;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+    left: 0;
+    position: fixed !important;
+    top:0;
+    z-index: 1;
+    padding: 90px 0 30px;
+}
+
+#brewery-content {
+	max-width: 485px;
+	position: relative;
+	z-index: 2;
+	display: block;
+	margin: 100px 0;
+	margin-left: 30px;
+	width: 60%;
+}
+
+#find-breweries {
+	background: #ab4a9c;
+	background: webkit-linear-gradient(to bottom right, #ab4a9c, #662d91);
+	background: linear-gradient(to bottom right, #ab4a9c, #662d91);
+	padding: 25px;
+	margin-top: 20px;
+}
+
+.brewery-num {
+	background: #662d91;
+	padding: 5px 15px;
+	color: #ffffff;
+}
+
+#form-content {
+	background: #ffffff;
+	padding: 25px;
+}
+
+#contact-us {
+	background: #ffffff;
+	padding: 25px;
+	min-height: 200px;
+	text-align: center;
+}
+
+footer#splash-footer {
+ 	min-height: 90px;
+	position: absolute;
+ 	bottom: 5px;
+ 	background: url(../images/footer-bg.png) repeat-x;
+ 	width: 400px;
+ 	height: 185px;	
+ 	background-repeat: repeat-x;
+ 	width: 100%;
+}
+
+footer#main-footer {
+ 	min-height: 90px;
+	position: absolute;
+}
+
+@media 
+(-webkit-min-device-pixel-ratio: 2), 
+(min-resolution: 192dpi) { 
+    /* Retina-specific stuff here */
+    a#splash-logo {
+	background: url(../images/logo@2x.png);
+	background-size: 300px 300px;
+}
+ a#logo {
+	background: url(../images/logo-header@2x.png);
+	background-size: 200px 68px;
+}
+
+a#facebook {
+	background: url(../images/facebook@2x.png);
+	background-size: 30px 30px;
+}
+
+a#twitter {
+	background: url(../images/twitter@2x.png);
+	background-size: 30px 30px;
+}
+
+a#instagram {
+	background: url(../images/instagram@2x.png);
+	background-size: 30px 30px;
+}
+
+}
+
