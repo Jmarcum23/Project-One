@@ -51,6 +51,11 @@ h3 {
 	line-height: 2.5rem;
 }
 
+h3.map-heading {
+	margin-top: 0px;
+	color: #662d91;
+}
+
 a#logo {
 	display: block;
 	background: url(../images/logo-header.png);

@@ -5,6 +5,16 @@ var coords = [];
 var arrayLength;
 var breweryNum = 1;
 var map;
+var infoWindow;
+var brewery;
+var address;
+var locality;
+var region;
+var postalCode;
+var phone;
+var website;
+var infoWindow;
+var contentString;
 
 
 //Display Brewery Info
@@ -29,13 +39,13 @@ function displayBreweryInfo() {
 		arrayLength = response.data.length;
 
 		for (var i = 0; i < arrayLength; i++) {
-			var brewery = response.data[i].name;
-			var address = response.data[i].streetAddress;
-			var locality = response.data[i].locality;
-			var region = response.data[i].region;
-			var postalCode = response.data[i].postalCode;
-			var phone = response.data[i].phone;
-			var website = response.data[i].website;	
+			brewery = response.data[i].name;
+			address = response.data[i].streetAddress;
+			locality = response.data[i].locality;
+			region = response.data[i].region;
+			postalCode = response.data[i].postalCode;
+			phone = response.data[i].phone;
+			website = response.data[i].website;	
 			latitude = response.data[i].latitude;
 			longitude = response.data[i].longitude;	
 			coords[i] = [latitude,longitude];
@@ -52,23 +62,42 @@ function displayBreweryInfo() {
 function initMap() {
 	var uluru = {lat: 32.7157, lng: -117.1611};
 	map = new google.maps.Map(document.getElementById('map'), {
-	  zoom: 10,
+	  zoom: 13,
 	  scrollwheel: false,
 	  center: uluru
 	});
-	var marker = new google.maps.Marker({
-	position: uluru,
-	map: map,
-	draggable: true,
-	animation: google.maps.Animation.DROP,
-	icon: {
-	url:'file:///users/jmarcum/documents/school/project-one/assets/images/map-icon@2x.png',
-	size: new google.maps.Size(40, 52),
-	scaledSize: new google.maps.Size(40, 52),
-	}
-	});
-	marker.addListener('click', toggleBounce);
+	infoWindow = new google.maps.InfoWindow;
+
+
+	 if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+
 }
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+}
+
 
 function toggleBounce() {
     if (marker.getAnimation() !== null) {
@@ -92,11 +121,24 @@ function dropPins () {
 			scaledSize: new google.maps.Size(40, 52),
 			}
 		});
-		console.log(marker);
-		console.log(coords);
+		contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h3 id="firstHeading" class="firstHeading map-heading">' + brewery + '</h3>'+
+            '<div id="bodyContent">'+
+            '<p>' + address + "<br>" + locality + ", " + region + " " + postalCode + '</p>' + 
+            '</div>'+
+            '</div>';
+		infoWindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+		map.panTo(latLng);
+		marker.addListener('click', function() {
+          infoWindow.open(map, marker);
+        });
+
 	}
 }
-
 
 //What happens when find breweries button is clicked
 $("#find-breweries-btn").on("click", function(event) {
