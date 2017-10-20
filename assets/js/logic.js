@@ -11,7 +11,7 @@ function displayBreweryInfo() {
 			return framejax.ajax({
 			method: "GET",
 			dataType: "json",
-			 url: csProxyUtils.buildJsonpProxyUrl(apiKey, queryURL),
+			url: csProxyUtils.buildJsonpProxyUrl(apiKey, queryURL),
 	  	});	
 	};
 
