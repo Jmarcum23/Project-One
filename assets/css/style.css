@@ -231,28 +231,44 @@ footer#main-footer {
 (min-resolution: 192dpi) { 
     /* Retina-specific stuff here */
     a#splash-logo {
-	background: url(../images/logo@2x.png);
-	background-size: 300px 300px;
+		background: url(../images/logo@2x.png);
+		background-size: 300px 300px;
+	}
+ 	a#logo {
+		background: url(../images/logo-header@2x.png);
+		background-size: 200px 68px;
+	}
+
+	a#facebook {
+		background: url(../images/facebook@2x.png);
+		background-size: 30px 30px;
+	}
+
+	a#twitter {
+		background: url(../images/twitter@2x.png);
+		background-size: 30px 30px;
+	}
+
+	a#instagram {
+		background: url(../images/instagram@2x.png);
+		background-size: 30px 30px;
+	}
 }
- a#logo {
-	background: url(../images/logo-header@2x.png);
-	background-size: 200px 68px;
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575px) { 
+	
 }
 
-a#facebook {
-	background: url(../images/facebook@2x.png);
-	background-size: 30px 30px;
-}
-
-a#twitter {
-	background: url(../images/twitter@2x.png);
-	background-size: 30px 30px;
-}
-
-a#instagram {
-	background: url(../images/instagram@2x.png);
-	background-size: 30px 30px;
-}
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767px) {
 
 }
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991px) { ... }
+
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199px) { ... }
+
+
 

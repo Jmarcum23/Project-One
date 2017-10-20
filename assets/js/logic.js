@@ -1,7 +1,6 @@
 //Global Variables
 var map;
 
-
 //Display Brewery Info
 function displayBreweryInfo() {
 	var zipcode = $("#zipcode-input").val().trim();
@@ -25,9 +24,7 @@ function displayBreweryInfo() {
 }
 
 function breweriesInfo(breweries){
-	for (var i = 0; i < breweries.length; i++){
-		breweryInfo(breweries[i], i);
-	}
+	breweries.map(breweryInfo);
 }
 
 function breweryInfo(brewery, i) {
@@ -118,9 +115,7 @@ function dropPin(pin){
 }
 
 function dropPins(pins) {
-	for (var i = 0; i < pins.length; i++){
-		dropPin(pins[i]);
-	}
+	pins.map(dropPin);
 }
 
 //What happens when find breweries button is clicked
