@@ -1,20 +1,5 @@
 //Global Variables
-var latitude;
-var longitude;
-var coords = [];
-var arrayLength;
-var breweryNum = 1;
 var map;
-var infoWindow;
-var brewery;
-var address;
-var locality;
-var region;
-var postalCode;
-var phone;
-var website;
-var infoWindow;
-var contentString;
 
 
 //Display Brewery Info
@@ -32,30 +17,26 @@ function displayBreweryInfo() {
 	};
 
 	proxyCall(queryURL).done(function(response) {
-
-		console.log(response);
-		console.log(response.data.length);
-		var breweryDiv = $("<div class='brewery'>");
-		arrayLength = response.data.length;
-
-		for (var i = 0; i < arrayLength; i++) {
-			brewery = response.data[i].name;
-			address = response.data[i].streetAddress;
-			locality = response.data[i].locality;
-			region = response.data[i].region;
-			postalCode = response.data[i].postalCode;
-			phone = response.data[i].phone;
-			website = response.data[i].website;	
-			latitude = response.data[i].latitude;
-			longitude = response.data[i].longitude;	
-			coords[i] = [latitude,longitude];
-			var pOne = $("<p>").html("<h3><span class=\"brewery-num\">" + breweryNum++ + "</span> " + brewery + "</h3>");breweryDiv.append(pOne);
-			var pTwo = $("<p>").html(address + "<br>" + locality + ", " + region + " " + postalCode + "<br>" + phone);breweryDiv.append(pTwo);
-			var pThree = $('<p>').html("<a class=\"btn\" id=\"website-btn\" href=" + website + " target=\"_blank\">website" + "</a><br>" + "<hr>");breweryDiv.append(pThree);
-			$('#form-content').prepend(breweryDiv);
-		}
-		dropPins();
+		//console.log(response);
+		//console.log(response.data.length);
+		breweriesInfo(response.data);
+		dropPins(response.data);
 	});
+}
+
+function breweriesInfo(breweries){
+	for (var i = 0; i < breweries.length; i++){
+		breweryInfo(breweries[i], i);
+	}
+}
+
+function breweryInfo(brewery, i) {
+	console.log(brewery);
+	var breweryDiv = $("<div class='brewery'>");
+	var pOne = $("<p>").html("<h3><span class=\"brewery-num\">" + (i+1) + "</span> " + brewery.name + "</h3>");breweryDiv.append(pOne);
+	var pTwo = $("<p>").html(brewery.streetAddress + "<br>" + brewery.locality + ", " + brewery.region + " " + brewery.postalCode + "<br>" + brewery.phone);breweryDiv.append(pTwo);
+	var pThree = $('<p>').html("<a class=\"btn\" id=\"website-btn\" href=" + brewery.website + " target=\"_blank\">website" + "</a><br>" + "<hr>");breweryDiv.append(pThree);
+	$('#form-content').append(breweryDiv);
 }
 
 //Google Map API 
@@ -66,27 +47,27 @@ function initMap() {
 	  scrollwheel: false,
 	  center: uluru
 	});
-	infoWindow = new google.maps.InfoWindow;
+	var infoWindow = new google.maps.InfoWindow;
 
 
-	 if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
+	if (navigator.geolocation) {
+	  navigator.geolocation.getCurrentPosition(function(position) {
+	    var pos = {
+	      lat: position.coords.latitude,
+	      lng: position.coords.longitude
+	    };
 
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            infoWindow.open(map);
-            map.setCenter(pos);
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
+	    infoWindow.setPosition(pos);
+	    infoWindow.setContent('Location found.');
+	    infoWindow.open(map);
+	    map.setCenter(pos);
+	  }, function() {
+	    handleLocationError(true, infoWindow, map.getCenter());
+	  });
+	} else {
+	  // Browser doesn't support Geolocation
+	  handleLocationError(false, infoWindow, map.getCenter());
+	}
 
 }
 
@@ -98,7 +79,6 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.open(map);
 }
 
-
 function toggleBounce() {
     if (marker.getAnimation() !== null) {
       marker.setAnimation(null);
@@ -107,9 +87,8 @@ function toggleBounce() {
     }
 }
 
-function dropPins () {
-	for (var i = 0; i < arrayLength; i++){
-		var latLng = new google.maps.LatLng(coords[i][0],coords[i][1]);
+function dropPin(pin){
+		var latLng = new google.maps.LatLng(pin.latitude,pin.longitude);
         var marker = new google.maps.Marker({
 	        position: latLng,
 	        map: map,
@@ -121,29 +100,32 @@ function dropPins () {
 			scaledSize: new google.maps.Size(40, 52),
 			}
 		});
-		contentString = '<div id="content">'+
+		var contentString = '<div id="content">'+
             '<div id="siteNotice">'+
             '</div>'+
-            '<h3 id="firstHeading" class="firstHeading map-heading">' + brewery + '</h3>'+
+            '<h3 id="firstHeading" class="firstHeading map-heading">' + pin.name + '</h3>'+
             '<div id="bodyContent">'+
-            '<p>' + address + "<br>" + locality + ", " + region + " " + postalCode + '</p>' + 
+            '<p>' + pin.streetAddress + "<br>" + pin.locality + ", " + pin.region + " " + pin.postalCode + '</p>' + 
             '</div>'+
             '</div>';
-		infoWindow = new google.maps.InfoWindow({
+		var infoWindow = new google.maps.InfoWindow({
           content: contentString
         });
 		map.panTo(latLng);
 		marker.addListener('click', function() {
           infoWindow.open(map, marker);
         });
+}
 
+function dropPins(pins) {
+	for (var i = 0; i < pins.length; i++){
+		dropPin(pins[i]);
 	}
 }
 
 //What happens when find breweries button is clicked
 $("#find-breweries-btn").on("click", function(event) {
 	event.preventDefault();
-	breweryNum = 1;
 	$('#form-content').empty();
 	displayBreweryInfo();
 });
