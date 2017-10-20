@@ -8,15 +8,15 @@ function displayBreweryInfo() {
 	var apiKey = "272f3002d2ba42214bb93754e572957f692647d0";
 
 	        var proxyCall = function(queryURL){
-			return $.ajax({
+			return framejax.ajax({
 			method: "GET",
 			dataType: "json",
-			url: csProxyUtils.buildProxyUrl(apiKey, queryURL),
+			 url: csProxyUtils.buildJsonpProxyUrl(apiKey, queryURL),
 	  	});	
 	};
 
 	proxyCall(queryURL).done(function(response) {
-		//console.log(response);
+		console.log(response);
 		//console.log(response.data.length);
 		breweriesInfo(response.data);
 		dropPins(response.data);
@@ -92,7 +92,7 @@ function dropPin(pin){
 	        draggable: true,
 			animation: google.maps.Animation.DROP,
 			icon: {
-			url:'../../assets/images/map-icon@2x.png',
+			url:'file:///users/jmarcum/documents/school/project-one/assets/images/map-icon@2x.png',
 			size: new google.maps.Size(40, 52),
 			scaledSize: new google.maps.Size(40, 52),
 			}

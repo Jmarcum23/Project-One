@@ -95,6 +95,10 @@ ul#social-media li a {
 	display: block;
 }
 
+ul#social-media-2 {
+	display: none;
+}
+
 a#facebook {
 	background: url(../images/facebook.png);
 	background-repeat: no-repeat;
@@ -254,21 +258,37 @@ footer#main-footer {
 		background-size: 30px 30px;
 	}
 }
-// Extra small devices (portrait phones, less than 576px)
-@media (max-width: 575px) { 
+
+@media screen and (max-width: 980px) {
+
 	
 }
 
-// Small devices (landscape phones, less than 768px)
-@media (max-width: 767px) {
+@media screen and (max-width: 768px) {
+	#brewery-content {
+		margin: 350px 0;
+		margin-left: 5%;
+		width: 80%;
+	}
 
+	ul#social-media {
+		display: none;
+	}
+	
 }
 
-// Medium devices (tablets, less than 992px)
-@media (max-width: 991px) { ... }
+@media screen and (max-width: 640px) {
+	#brewery-content {
+		margin: 350px 0;
+		margin-left: 5%;
+		width: 80%;
+	}
 
-// Large devices (desktops, less than 1200px)
-@media (max-width: 1199px) { ... }
+	ul#social-media {
+		display: none;
+	}
+	
+}
 
 
 
