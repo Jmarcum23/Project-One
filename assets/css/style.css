@@ -265,11 +265,7 @@ footer#main-footer {
 }
 
 @media screen and (max-width: 768px) {
-	#brewery-content {
-		margin: 350px 0;
-		margin-left: 5%;
-		width: 80%;
-	}
+
 
 	ul#social-media {
 		display: none;
@@ -279,9 +275,9 @@ footer#main-footer {
 
 @media screen and (max-width: 640px) {
 	#brewery-content {
-		margin: 350px 0;
-		margin-left: 5%;
-		width: 80%;
+		margin: 380px 0;
+		margin-left: 0;
+		width: 100%;
 	}
 
 	ul#social-media {

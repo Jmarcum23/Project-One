@@ -16,7 +16,7 @@ function displayBreweryInfo() {
 	};
 
 	proxyCall(queryURL).done(function(response) {
-		console.log(response);
+		//console.log(response);
 		//console.log(response.data.length);
 		breweriesInfo(response.data);
 		dropPins(response.data);
