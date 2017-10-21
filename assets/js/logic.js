@@ -92,7 +92,7 @@ function dropPin(pin){
 	        draggable: true,
 			animation: google.maps.Animation.DROP,
 			icon: {
-			url:'../../images/map-icon@2x.png',
+			url:'./images/map-icon@2x.png',
 			size: new google.maps.Size(40, 52),
 			scaledSize: new google.maps.Size(40, 52),
 			}
