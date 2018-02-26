@@ -1,5 +1,4 @@
 //Global Variables
-var request = require("request");
 var map;
 
 //Display Brewery Info
@@ -9,9 +8,7 @@ function displayBreweryInfo() {
 	"&key=0e8760e7ad6c26f9098f623ca7d0b5a7";
 	var apiKey = "272f3002d2ba42214bb93754e572957f692647d0";
 
-	        request(queryURL, (err, res, body) => {
-	        	
-	        }){
+		var proxyCall = function(queryURL){
 			return framejax.ajax({
 			method: "GET",
 			dataType: "json",
